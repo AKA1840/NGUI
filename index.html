@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- css files -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="app.css">
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	<div class="appContainor">
+	<tabset>
+    	<tab heading="Step 1" active="tabs[0].active">
+    		<form name="stepOneForm" class="stepOneDiv">
+    			<label>First Name</label><br/>
+    			<input ng-model="user.firstName" type="text" class="form-control" required/><br/>
+    			<label>Last Name</label><br/>
+    			<input ng-model="user.lastName" type="text"  class="form-control" required/><br/>
+    			<label>Email</label><br/>
+    			<input ng-model="user.email" type="email"  class="form-control" required/><br/>
+    			<label>Phone</label><br/>
+    			<input ng-model="user.phone" type="text"  class="form-control" required/><br/>
+    			<button ng-click="next(1)" class="btn btn-default" ng-disabled="stepOneForm.$invalid">Next</button>
+    		</form>
+    	</tab>
+    	<tab heading="Step 2" active="tabs[1].active" disable="tabs[1].disable">
+      		<form name="stepTwoForm" class="stepOneDiv">
+      			<label>Location</label><br/>
+      			<select name="location" ng-model="user.location" class="form-control" required>
+      				<option value="Boston" class="form-control">Boston</option>
+      				<option value="New York">New York</option>
+      				<option value="Chicago">Chicago</option>
+      				<option value="San Francisco">San Francisco</option>
+    			  </select>
+
+				    <h4>Date Depart</h4>
+        		<div>
+            		<p class="input-group">
+              		<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="user.departdate" is-open="statusDepart.opened" min-date="minDateDepart" max-date="'2020-06-22'" datepicker-options="dateOptions" date-disabled="disabledDepart(date, mode)" ng-required="true" close-text="Close" ng-change="clearReturn()" required/>
+              		<span class="input-group-btn">
+                		<button type="button" class="btn btn-default" ng-click="openDepart($event)">
+                			<i class="glyphicon glyphicon-calendar"></i>
+                		</button>
+              		</span>
+            		</p>
+        		</div>
+        		<h4>Date Return</h4>
+				    <div>
+            		<p class="input-group">
+              		<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="user.returndate" is-open="statusReturn.opened" min-date="user.departdate" max-date="'2020-06-22'" datepicker-options="dateOptions" date-disabled="disabledReturn(date, mode)" ng-required="true" close-text="Close" required/>
+              		<span class="input-group-btn">
+                		<button type="button" class="btn btn-default" ng-click="openReturn($event)">
+                			<i class="glyphicon glyphicon-calendar"></i>
+                		</button>
+              		</span>
+            		</p>
+        		</div>
+      			<button ng-click="next(2)" class="btn btn-default" ng-disabled="stepTwoForm.$invalid">Next</button>
+    		</form>
+    	</tab>
+    	<tab heading="Step 3" active="tabs[2].active" disable="tabs[2].disable">
+      		{{user.firstName}} {{user.lastName}} ({{user.phone}}) will depart for {{user.location}} on {{user.departdate | date:'longDate'}} and return on {{user.returndate|date:'longDate'}}.
+    	</tab>
+  	</tabset>
+	</div>
+
+<!-- script files -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.3/ui-bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.3/ui-bootstrap-tpls.min.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>

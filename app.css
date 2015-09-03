@@ -1,0 +1,13 @@
+
+.appContainor {
+	width:500px;
+	height:500px;
+	margin: 30px auto;
+}
+
+.stepOneDiv {
+	width:400px;
+	margin: 10px auto;
+	padding: 10px;
+
+}
